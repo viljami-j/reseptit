@@ -5,11 +5,12 @@ import androidx.room.*
 
 @Entity(tableName = "recipe")
 data class Recipe(
-
+    // Aina kun tätä classia muokataan niin poista sovellus emulaattorista, tai tyhjennä tiedot
+    // ennen uudelleenajoa (Run 'app'), muuten crashaa.
 
     val name: String?,
     val description: String?,
-    val ingredients: String?, // String = faster development, could be swapped later to a proper list/etc.
+    val ingredients: String?, // String = faster development? could be swapped later to a proper list/etc.
     @ColumnInfo(name = "cooking_instructions") val cookingInstructions: String?,
     @ColumnInfo(name = "cooking_time_estimate") val cookingTimeEstimate: Float?, // Could add time units selection, but maybe default to hours.
     @ColumnInfo(name = "image_uri") val imageUri: String?,

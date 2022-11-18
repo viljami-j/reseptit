@@ -16,7 +16,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
             "Koodarin rohto",
             "Elvyttää nääntyneen ja unettoman koodarin",
             "- 10g suolaa\n- 2.5dl kyyneliä\n- 200mg raakaa kofeiinijauhetta",
-            "- Lämmitä uuni 300 C\n- Aseta ainekset lasipulloon ja kääri se folioon\n- Paista uunissa 15min\n- Jäähdytä 15min kylmässä vesihauteessa\n- Toivu.",
+            "- Lämmitä uuni 300 C\n- Aseta ainekset lasipulloon ja kääri se folioon\n- Paista uunissa 15min\n- Jäähdytä 15min kylmässä vesihauteessa\n- Juo ja toivu.",
             5.5f,
             null
         )
