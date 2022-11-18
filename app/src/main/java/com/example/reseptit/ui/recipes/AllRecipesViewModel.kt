@@ -1,10 +1,17 @@
 package com.example.menudrawerexample.ui.slideshow
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import com.example.reseptit.Recipe
+import com.example.reseptit.RecipeDatabase
 
-class AllRecipesViewModel : ViewModel() {
+class AllRecipesViewModel(application: Application) : AndroidViewModel(application) {
+
+    private val recipeDatabase by lazy { RecipeDatabase.getDatabase(application).recipeDao() }
+
+
 
     private val _text = MutableLiveData<String>().apply {
         value = "Tämä on Kaikkien reseptien sivu"
