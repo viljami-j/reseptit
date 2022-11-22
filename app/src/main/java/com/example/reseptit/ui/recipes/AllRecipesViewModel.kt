@@ -1,4 +1,4 @@
-package com.example.menudrawerexample.ui.slideshow
+package com.example.reseptit.ui.recipes
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

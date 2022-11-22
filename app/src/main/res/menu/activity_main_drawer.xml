@@ -1,20 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_home_icon"
             android:title="@string/menu_home" />
         <item
             android:id="@+id/nav_search"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_search_icon"
             android:title="@string/menu_search" />
         <item
             android:id="@+id/nav_all_recipes"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_recipes_icon"
             android:title="@string/menu_all_recipes" />
+        <item
+            android:id="@+id/nav_add"
+            android:icon="@drawable/add_icon"
+            android:title="@string/menu_add_recipe" />
+    </group>
+    <group>
+        <item
+            android:title=""/>
+        <item
+            android:id="@+id/app_bar_darkmode"
+            android:title="@string/app_bar_darkmode"
+            android:icon="@drawable/ic_dark_mode_icon" />
+        <item
+            android:id="@+id/app_bar_lightmode"
+            android:title="@string/app_bar_lightmode"
+            android:icon="@drawable/ic_light_mode_icon" />
+        <item
+            android:title=""/>
+        <item
+            android:title=""/>
+        <item
+            android:title=""
+            android:titleCondensed="@string/made_by"/>
     </group>
 </menu>

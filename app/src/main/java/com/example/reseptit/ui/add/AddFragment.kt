@@ -1,4 +1,4 @@
-package com.example.reseptit.ui.recipes
+package com.example.reseptit.ui.add
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.reseptit.databinding.FragmentAllRecipesBinding
+import com.example.reseptit.databinding.FragmentAddBinding
 
-class AllRecipesFragment : Fragment() {
+class AddFragment : Fragment() {
 
-    private var _binding: FragmentAllRecipesBinding? = null
+    private var _binding: FragmentAddBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -22,16 +22,16 @@ class AllRecipesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val slideshowViewModel =
-            ViewModelProvider(this).get(AllRecipesViewModel::class.java)
+        val homeViewModel =
+            ViewModelProvider(this).get(AddViewModel::class.java)
 
-        _binding = FragmentAllRecipesBinding.inflate(inflater, container, false)
+        _binding = FragmentAddBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textAllRecipes
-        slideshowViewModel.text.observe(viewLifecycleOwner) {
+        /*val textView: TextView = binding.addText
+        homeViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
-        }
+        }*/
         return root
     }
 

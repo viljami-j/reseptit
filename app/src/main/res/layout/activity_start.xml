@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".StartActivity"
+    android:background="@color/palette2">
+
+    <ImageView
+        android:id="@+id/AppIcon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/start_menu_icon_256px"
+        android:layout_marginTop="60dp"
+        />
+
+    <TextView
+        android:id="@+id/AppName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_below="@+id/AppIcon"
+        android:layout_marginTop="60dp"
+        android:text="@string/nav_header_title"
+        android:textSize="40sp"
+        android:textColor="#FFFF"/>
+
+    <TextView
+        android:id="@+id/AppMadeBy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/AppName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:text="@string/made_by"
+        android:textColor="#FFFF"
+        android:textSize="12sp" />
+
+    <ProgressBar
+        android:id="@+id/AppProgressBar"
+        android:layout_width="61dp"
+        android:layout_height="59dp"
+        android:layout_below="@+id/AppMadeBy"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="50dp"
+        android:indeterminateTint="@color/white" />
+</RelativeLayout>

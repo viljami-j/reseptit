@@ -1,10 +1,11 @@
-package com.example.menudrawerexample.ui.gallery
+package com.example.reseptit.ui.search
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.reseptit.databinding.FragmentSearchBinding
@@ -23,15 +24,16 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val galleryViewModel =
-            ViewModelProvider(this).get(SearchViewModel::class.java)
+            ViewModelProvider(this)[SearchViewModel::class.java]
 
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textSearch
-        galleryViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+        //var searchView: SearchView = binding.searchText
+        /*galleryViewModel.text.observe(viewLifecycleOwner) {
+            var query : String = searchView.query as String
+            query = it
+        }*/
         return root
     }
 

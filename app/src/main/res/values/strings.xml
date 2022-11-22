@@ -1,13 +1,28 @@
 <resources>
-    <string name="app_name">MenuDrawerExample</string>
+    <string name="app_name">ReseptiApp</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">TODO</string>
-    <string name="nav_header_subtitle">TODO</string>
+    <string name="nav_header_title">Reseptisovellus</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_search">Search</string>
-    <string name="menu_all_recipes">Kaikki reseptit</string>
+    <string name="menu_home">Kotisivu</string>
+    <string name="menu_search">Haku</string>
+    <string name="menu_all_recipes">Reseptit</string>
+    <string name="menu_add">Lisää</string>
+    <string name="menu_add_recipe">Lisää resepti</string>
+    <string name="app_bar_darkmode">Dark Mode</string>
+    <string name="app_bar_lightmode">Light Mode</string>
+
+    <string name="made_by">Made By: Viljami Mäkelä &amp; Daniel Satuli</string>
+    <string name="share">Share</string>
+    <string name="search_text">Haku</string>
+    <string name="recipe_search">Hae resepti tästä</string>
+    <string name="add_text">Lisää resepti</string>
+    <string name="query_hint">Etsi resepti</string>
+    <string name="required">Vaadittu</string>
+    <string name="recipe_name">Reseptin nimi</string>
+    <string name="time_eval">Aika-arvio</string>
+
+
 </resources>
