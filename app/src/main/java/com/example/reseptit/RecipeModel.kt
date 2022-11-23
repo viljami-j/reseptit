@@ -1,14 +1,13 @@
 package com.example.reseptit
 
 import android.content.Context
+import androidx.lifecycle.LiveData
 import androidx.room.*
-
-// Tietokannan käyttöliittymä löytyy RecipesRepositorysta
 
 @Entity(tableName = "recipe")
 data class Recipe(
     // Aina kun tätä classia muokataan niin poista sovellus emulaattorista, tai tyhjennä tiedot
-    // ennen uudelleenajoa (Run 'app'), muuten crashaa.
+    // ennen uudelleenajoa (Run 'app'), muuten todennäköisesti crashaa.
 
     val name: String?,
     val description: String?,
@@ -24,15 +23,15 @@ data class Recipe(
 @Dao
 interface RecipeDao {
     // CREATE
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(vararg recipes: Recipe)
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertOne(recipe: Recipe)
 
     // READ
     @Query("SELECT * FROM recipe")
-    fun getAll(): List<Recipe>
+    fun getRecipes(): LiveData<List<Recipe>>
 
     @Query("SELECT * FROM recipe WHERE rid IN (:recipeIds)")
     fun loadAllByIds(recipeIds: IntArray): List<Recipe>
