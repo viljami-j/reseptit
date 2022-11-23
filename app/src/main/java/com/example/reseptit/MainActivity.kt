@@ -14,7 +14,6 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.room.Room
 import com.example.reseptit.databinding.ActivityMainBinding
 import com.google.android.material.navigation.NavigationView
 
@@ -22,8 +21,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
-
-    private val recipeDatabase by lazy { RecipeDatabase.getDatabase(this).recipeDao() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,14 +42,14 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this@MainActivity, "DarkMode ON",
                 Toast.LENGTH_SHORT).show()
 
-            true;
+            true
         }
         lightMode.setOnMenuItemClickListener{
             AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_NO)
             Toast.makeText(this@MainActivity, "LightMode ON",
                 Toast.LENGTH_SHORT).show()
 
-            true;
+            true
         }
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         // Passing each menu ID as a set of Ids because each
