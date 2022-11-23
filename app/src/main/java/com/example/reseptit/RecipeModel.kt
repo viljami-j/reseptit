@@ -3,6 +3,8 @@ package com.example.reseptit
 import android.content.Context
 import androidx.room.*
 
+// Tietokannan käyttöliittymä löytyy RecipesRepositorysta
+
 @Entity(tableName = "recipe")
 data class Recipe(
     // Aina kun tätä classia muokataan niin poista sovellus emulaattorista, tai tyhjennä tiedot
@@ -21,6 +23,14 @@ data class Recipe(
 
 @Dao
 interface RecipeDao {
+    // CREATE
+    @Insert
+    fun insertAll(vararg recipes: Recipe)
+
+    @Insert
+    fun insertOne(recipe: Recipe)
+
+    // READ
     @Query("SELECT * FROM recipe")
     fun getAll(): List<Recipe>
 
@@ -33,14 +43,13 @@ interface RecipeDao {
     @Query("SELECT * FROM recipe WHERE name LIKE :recipeName LIMIT 5")
     fun findRecipesByName(recipeName: String): List<Recipe>
 
-    @Insert
-    fun insertAll(vararg recipes: Recipe)
+    // UPDATE
+    @Update
+    fun update(vararg recipes: Recipe)
 
-    @Insert
-    fun insertOne(recipe: Recipe)
-
+    // DELETE
     @Delete
-    fun delete(recipe: Recipe)
+    fun delete(vararg recipes: Recipe)
 }
 
 @Database(entities = [Recipe::class], version = 1, exportSchema = false)
