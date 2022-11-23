@@ -1,0 +1,3 @@
+- Install NPM if not installed already.
+- Run dependencies.bat
+- Run start_mockup_db.bat
