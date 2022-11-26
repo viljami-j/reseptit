@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.reseptit.R
 import com.example.reseptit.Recipe
 import com.example.reseptit.RecipeDatabase
 import com.example.reseptit.RecipesRepository
@@ -46,7 +47,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     val eventNetworkError: LiveData<Boolean>
         get() = _eventNetworkError
 
-    val networkErrorToast: Toast = Toast.makeText(application, "Yhteysvirhe:\nUusia reseptejä ei voitu synkronoida", Toast.LENGTH_LONG)
+    val networkErrorToast: Toast = Toast.makeText(application, R.string.network_error_toast, Toast.LENGTH_LONG)
 
 
     private val _text = MutableLiveData<String>().apply {

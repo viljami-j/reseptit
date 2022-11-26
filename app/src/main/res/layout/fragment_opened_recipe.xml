@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+
+    <ImageView
+        android:id="@+id/recipe_opened_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/recipe_cooking_time_in_minutes"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/recipe_prefix_cooking_time_in_minutes" />
+
+        <Space
+            android:layout_width="10dp"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/recipe_opened_cooking_time_in_minutes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/recipe_suffix_cooking_time_in_minutes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            tools:text="minuuttia/tuntia/päivää" />
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="15dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/ingredients"
+        android:textStyle="bold"
+        tools:text="Ainesosat:" />
+
+    <TextView
+        android:id="@+id/recipe_opened_ingredients"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="17sp"
+        tools:text="- Ainesosa 1\n- Ainesosa 2\n- Ainesosa 3\n- Ainesosa 4\n- Ainesosa 5" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/recipe_instructions"
+        android:textStyle="bold" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/recipe_opened_cooking_instructions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum egestas urna eu tincidunt lobortis. Etiam gravida ipsum purus, non accumsan urna malesuada vitae. Nullam quis magna in lorem laoreet dapibus a ut odio. Sed pellentesque lobortis orci in placerat. Aliquam erat volutpat. In ornare varius dictum. Pellentesque vitae lorem non tellus blandit porttitor at vitae risus.  Curabitur magna lacus, facilisis at consectetur nec, venenatis nec justo. Aliquam dictum rutrum maximus. Nulla sed enim non lacus bibendum tincidunt ac ac nunc. Curabitur scelerisque lobortis magna, quis ultricies nulla vestibulum in. Curabitur ut diam vulputate nulla venenatis tempor et vitae tortor. Proin accumsan varius arcu non dapibus. Nulla semper dolor elit, et pharetra felis semper ut. Fusce aliquam eleifend nulla nec commodo. Aenean suscipit lorem mauris, eget scelerisque erat consectetur suscipit. Nam luctus viverra fermentum. Phasellus sit amet enim ornare, porttitor tortor nec, sagittis eros.  Duis vitae interdum eros. Sed sit amet luctus ligula. Nulla urna lectus, consequat sit amet lectus ac, iaculis facilisis quam. Morbi interdum tellus vitae ligula euismod, ut gravida quam mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam euismod quam sed tempus facilisis. Integer mauris sem, venenatis vitae feugiat vitae, molestie eget odio. Vestibulum mattis fringilla elit, sed condimentum urna ullamcorper quis. In vitae mauris mattis, rhoncus velit vel, semper justo. Duis euismod consequat erat, quis egestas sapien accumsan eu.  Aliquam id ullamcorper enim. Suspendisse ultricies vitae felis vel hendrerit. Pellentesque et congue odio, a auctor erat. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque metus eros, dapibus vel ex ac, finibus fringilla libero. Phasellus vitae nisi ullamcorper, pulvinar mi in, sodales tortor. Suspendisse interdum rutrum quam, condimentum fringilla diam dictum sit amet." />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

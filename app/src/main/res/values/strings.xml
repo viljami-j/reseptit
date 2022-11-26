@@ -14,6 +14,17 @@
     <string name="app_bar_darkmode">Dark Mode</string>
     <string name="app_bar_lightmode">Light Mode</string>
 
+    <string name="ingredients">Ainesosat:</string>
+    <string name="recipe_instructions">Valmistusohje:</string>
+    <string name="recipe_prefix_cooking_time_in_minutes">n.</string>
+
+    <string name="recipe_cooking_time_in_minutes">Valmistusaika:</string>
+    <string name="recipe_cooking_time_minutes">minuuttia</string>
+    <string name="recipe_cooking_time_hours">tuntia</string>
+    <string name="recipe_cooking_time_days">päivää</string>
+
+    <string name="network_error_toast">Yhteysvirhe: Uusia reseptejä ei voitu synkronoida</string>
+
     <string name="made_by">Made By: Viljami Mäkelä &amp; Daniel Satuli</string>
     <string name="share">Share</string>
     <string name="search_text">Haku</string>
@@ -23,6 +34,8 @@
     <string name="required">Vaadittu</string>
     <string name="recipe_name">Reseptin nimi</string>
     <string name="time_eval">Aika-arvio</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 
 
 </resources>

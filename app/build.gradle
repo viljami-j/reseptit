@@ -1,7 +1,18 @@
+buildscript {
+    repositories {
+        google()
+    }
+    dependencies {
+        def nav_version = "2.5.3"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
+    }
+}
+
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -34,7 +45,6 @@ android {
         viewBinding true
     }
     namespace 'com.example.reseptit'
-
 }
 
 dependencies {
@@ -83,6 +93,12 @@ dependencies {
 
     // Jetpack Compose Integration
     implementation("androidx.navigation:navigation-compose:$nav_version")
+
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    kapt "androidx.lifecycle:lifecycle-compiler:2.5.1"
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    implementation "androidx.paging:paging-runtime:3.1.1"
 
 
     implementation 'androidx.core:core-ktx:1.9.0'

@@ -9,12 +9,18 @@ data class Recipe(
     // Aina kun tätä classia muokataan niin poista sovellus emulaattorista, tai tyhjennä tiedot
     // ennen uudelleenajoa (Run 'app'), muuten todennäköisesti crashaa.
 
+    // Jos halutaan REST-päätteestä dataa,
+    // JSON objektien täytyy olla samannimisiä kuin muuttujanimet (esim. cookingInstructions)
     val name: String?,
     val description: String?,
     val ingredients: String?, // String = faster development? could be swapped later to a proper list/etc.
     @ColumnInfo(name = "cooking_instructions") val cookingInstructions: String?,
-    @ColumnInfo(name = "cooking_time_estimate") val cookingTimeEstimate: Float?, // Could add time units selection, but maybe default to hours.
-    @ColumnInfo(name = "image_uri") val imageUri: String?,
+    @ColumnInfo(name = "cooking_time_estimate") val cookingTimeInMinutes: Int?, // Could add time units selection, but maybe default to hours.
+
+    // Base64 rajoitus: Koko ei muistaakseni saa ylittää 1MB.
+    // Kuvan on hyvä olla resoluutiolta 256x256, jos näytetään listassa.
+    // Rajoja pitää vielä koetella. N. 800x800 vielä toimii
+    @ColumnInfo(name = "image_uri") val imageBase64: String?,
 
     // Tämä pitää olla pohjalla
     @PrimaryKey(autoGenerate = true) val rid: Int = 0
