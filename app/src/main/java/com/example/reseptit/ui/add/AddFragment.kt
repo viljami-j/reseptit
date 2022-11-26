@@ -22,8 +22,7 @@ class AddFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(AddViewModel::class.java)
+        //val homeViewModel = ViewModelProvider(this).get(AddViewModel::class.java)
 
         _binding = FragmentAddBinding.inflate(inflater, container, false)
         val root: View = binding.root
