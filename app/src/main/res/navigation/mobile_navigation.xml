@@ -33,7 +33,7 @@
         tools:layout="@layout/fragment_add"/>
     <fragment
         android:id="@+id/nav_opened_recipe"
-        android:name="com.example.reseptit.ui.recipes.OpenedRecipeFragment"
+        android:name="com.example.reseptit.ui.OpenedRecipeFragment"
         android:label="{openedRecipeTitle}"
         tools:layout="@layout/fragment_opened_recipe"
         />

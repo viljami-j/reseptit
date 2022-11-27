@@ -1,4 +1,4 @@
-package com.example.reseptit.ui.recipes
+package com.example.reseptit.ui
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -54,7 +54,7 @@ class OpenedRecipeFragment : Fragment() {
         // RecipeListAdapter.kt
         // RecyclerViewHolder.kt
 
-        var imgBA = arguments?.getByteArray("recipeImage")
+        val imgBA = arguments?.getByteArray("recipeImage")
         if (imgBA != null) {
             ivImage.setImageBitmap(BitmapFactory.decodeByteArray(imgBA, 0, imgBA.size))
         }
