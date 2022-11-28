@@ -23,8 +23,11 @@
     <string name="recipe_cooking_time_hours">tuntia</string>
     <string name="recipe_cooking_time_days">päivää</string>
 
+    <!-- Toasts -->
     <string name="network_error_toast">Yhteysvirhe: Uusia reseptejä ei voitu synkronoida</string>
+    <string name="no_search_results_toast">Ei hakutuloksia</string>
 
+    <!-- Untitled category -->
     <string name="made_by">Made By: Viljami Mäkelä &amp; Daniel Satuli</string>
     <string name="share">Share</string>
     <string name="search_text">Haku</string>

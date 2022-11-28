@@ -1,4 +1,4 @@
-package com.example.reseptit.ui.recipes
+package com.example.reseptit.ui.search
 
 import android.app.Application
 import android.widget.Toast
@@ -13,7 +13,7 @@ import com.example.reseptit.RecipesRepository
 import kotlinx.coroutines.launch
 import java.io.IOException
 
-class AllRecipesViewModel(application: Application) : AndroidViewModel(application) {
+class SearchViewmodel(application: Application) : AndroidViewModel(application) {
 
     private val recipesRepository = RecipesRepository(RecipeDatabase.getDatabase(application))
 
