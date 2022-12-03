@@ -37,6 +37,12 @@
     <string name="required">Vaadittu</string>
     <string name="recipe_name">Reseptin nimi</string>
     <string name="time_eval">Aika-arvio</string>
+    <string name="manual">Valmistus ohjeet</string>
+    <string name="mButton">Valitse</string>
+    <string name="label1">Valitse kuva kirjastosta</string>
+    <string name="label2">Ota kuva kameralla</string>
+    <string name="mButton2">Ota kuva</string>
+    <string name="addToDB">Luo resepti</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
 
