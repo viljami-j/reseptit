@@ -37,6 +37,8 @@ class HomeFragment : Fragment() {
 
     lateinit var homeViewModel: HomeViewModel
 
+    private var suggestionsTimer: Timer = Timer()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -67,6 +69,8 @@ class HomeFragment : Fragment() {
 
         homeViewModel.recipeName = binding.recipeName
         homeViewModel.recipeImg = binding.recipeImg
+
+        suggestionsTimer.run {  }
 
         return root
     }
@@ -104,17 +108,18 @@ class HomeFragment : Fragment() {
                 val rnd: Random = Random
                 var rndRecipeIndex: Int
 
-                requireActivity().runOnUiThread {
-                if (prefixList.isNotEmpty() && recipes.isNotEmpty())
-                {
-                    rndRecipeIndex = rnd.nextInt(0, recipes.size-1)
-                    val recipe = recipes[rndRecipeIndex]
-                    homeViewModel.recipeImg?.setImageBitmap(decodeB64ToBitmap(recipe.imageBase64))
-                    homeViewModel.recipeName?.text = prefixList[rnd.nextInt(
-                        0,
-                        prefixList.size - 1
-                    )] + " \"" + recipes[rndRecipeIndex].name + "\"?"
-                }
+                if (isAdded) {
+                    requireActivity().runOnUiThread {
+                        if (prefixList.isNotEmpty() && recipes.isNotEmpty()) {
+                            rndRecipeIndex = rnd.nextInt(0, recipes.size - 1)
+                            val recipe = recipes[rndRecipeIndex]
+                            homeViewModel.recipeImg?.setImageBitmap(decodeB64ToBitmap(recipe.imageBase64))
+                            homeViewModel.recipeName?.text = prefixList[rnd.nextInt(
+                                0,
+                                prefixList.size - 1
+                            )] + " \"" + recipes[rndRecipeIndex].name + "\"?"
+                        }
+                    }
                 }
             }
         }, 0, 3000)
@@ -122,6 +127,7 @@ class HomeFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        suggestionsTimer.cancel()
         _binding = null
     }
 }
