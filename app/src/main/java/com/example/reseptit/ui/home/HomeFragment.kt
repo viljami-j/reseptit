@@ -1,15 +1,24 @@
 package com.example.reseptit.ui.home
 
+import android.annotation.SuppressLint
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.reseptit.Recipe
 import com.example.reseptit.databinding.FragmentHomeBinding
+import com.example.reseptit.ui.search.HomeViewModel
+import java.util.*
+import kotlin.math.roundToInt
+import kotlin.random.Random
 
 class HomeFragment : Fragment() {
 
@@ -20,6 +29,11 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     private var recipes: List<Recipe> = listOf()
+
+    private var timeLeft: Int = 0
+
+    // Different prefixes for recipe suggestions
+    private var prefixList = listOf("Ehkä", "Kenties", "Saisiko olla", "Maistuisiko")
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,6 +65,60 @@ class HomeFragment : Fragment() {
         homeViewModel.recipes.observe(viewLifecycleOwner, recipesObserver)
 
         return root
+    }
+
+
+    // Function for scaling reducing image size
+    private fun scaleDown(
+        realImage: Bitmap, maxImageSize: Float,
+        filter: Boolean
+    ): Bitmap? {
+        val ratio = Math.min(
+            maxImageSize / realImage.width,
+            maxImageSize / realImage.height
+        )
+        val width = (ratio * realImage.width).roundToInt()
+        val height = (ratio * realImage.height).roundToInt()
+        return Bitmap.createScaledBitmap(
+            realImage, width,
+            height, filter
+        )
+    }
+
+    private fun decodeB64ToBitmap(b64: String?): Bitmap? {
+        val maxImageSize = 256f * 3
+        val decodedString: ByteArray = Base64.decode(b64, Base64.DEFAULT) //imageUri = base64 string in this case, not truly a uri
+        return scaleDown(BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size), maxImageSize, true)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+
+        Timer().scheduleAtFixedRate(object : TimerTask() {
+            @SuppressLint("SetTextI18n")
+            override fun run() {
+                val rnd: Random = Random
+                var rndRecipeIndex: Int
+                val recipeSuggestionsText: TextView = binding.recipeName
+                val recipeImg: ImageView = binding.recipeImg
+
+                requireActivity().runOnUiThread {
+                if (prefixList.isNotEmpty() && recipes.isNotEmpty())
+                {
+                    rndRecipeIndex = rnd.nextInt(0, recipes.size-1)
+                    val recipe = recipes[rndRecipeIndex]
+
+                    recipeImg.setImageBitmap(decodeB64ToBitmap(recipe.imageBase64))
+                    recipeSuggestionsText.text = prefixList[rnd.nextInt(
+                        0,
+                        prefixList.size - 1
+                    )] + " \"" + recipes[rndRecipeIndex].name + "\"?"
+                }
+                }
+            }
+        }, 0, 3000)
     }
 
     override fun onDestroyView() {

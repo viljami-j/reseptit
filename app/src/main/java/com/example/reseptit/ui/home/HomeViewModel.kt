@@ -1,6 +1,7 @@
-package com.example.reseptit.ui.home
+package com.example.reseptit.ui.search
 
 import android.app.Application
+import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -34,6 +35,11 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         refreshDataFromRepository()
     }
 
+    private val _text = MutableLiveData<String>().apply {
+        value = "Mitä tänään syötäisiin?"
+    }
+    var text: LiveData<String> = _text
+
     /**
      * Event triggered for network error. This is private to avoid exposing a
      * way to set this value to observers.
@@ -48,10 +54,4 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         get() = _eventNetworkError
 
     val networkErrorToast: Toast = Toast.makeText(application, R.string.network_error_toast, Toast.LENGTH_LONG)
-
-
-    private val _text = MutableLiveData<String>().apply {
-        value = "Tämä on Kotisivu. Mitä tänään syötäisiin? (Tähän kotisivulle vois ehkä valita satunnaisreseptejä näytille)"
-    }
-    var text: LiveData<String> = _text
 }

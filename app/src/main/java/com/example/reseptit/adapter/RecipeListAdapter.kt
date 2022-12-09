@@ -40,10 +40,10 @@ class RecipeListAdapter(private val recipes: List<Recipe>) : RecyclerView.Adapte
     }
 
     override fun onBindViewHolder(holder: RecyclerViewHolder, position: Int) {
-        val maxImageSize = 256f;
 
         val recipe = recipes[position]
 
+        val maxImageSize = 256f;
         val decodedString: ByteArray = Base64.decode(recipe.imageBase64, Base64.DEFAULT) //imageUri = base64 string in this case, not truly a uri
         val decodedByte: Bitmap? = scaleDown(BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size), maxImageSize, true)
 
