@@ -1,6 +1,7 @@
 package com.example.reseptit.ui.search
 
 import android.app.Application
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
@@ -19,6 +20,9 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     private val recipesRepository = RecipesRepository(RecipeDatabase.getDatabase(application))
 
     val recipes: LiveData<List<Recipe>> = recipesRepository.recipes
+
+    var recipeName: TextView? = null
+    var recipeImg: ImageView? = null
 
     private fun refreshDataFromRepository() {
         viewModelScope.launch {

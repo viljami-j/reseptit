@@ -35,14 +35,15 @@ class HomeFragment : Fragment() {
     // Different prefixes for recipe suggestions
     private var prefixList = listOf("Ehkä", "Kenties", "Saisiko olla", "Maistuisiko")
 
+    lateinit var homeViewModel: HomeViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this)[HomeViewModel::class.java]
 
+        homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
@@ -63,6 +64,9 @@ class HomeFragment : Fragment() {
         }
 
         homeViewModel.recipes.observe(viewLifecycleOwner, recipesObserver)
+
+        homeViewModel.recipeName = binding.recipeName
+        homeViewModel.recipeImg = binding.recipeImg
 
         return root
     }
@@ -94,24 +98,19 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
         Timer().scheduleAtFixedRate(object : TimerTask() {
             @SuppressLint("SetTextI18n")
             override fun run() {
                 val rnd: Random = Random
                 var rndRecipeIndex: Int
-                val recipeSuggestionsText: TextView = binding.recipeName
-                val recipeImg: ImageView = binding.recipeImg
 
                 requireActivity().runOnUiThread {
                 if (prefixList.isNotEmpty() && recipes.isNotEmpty())
                 {
                     rndRecipeIndex = rnd.nextInt(0, recipes.size-1)
                     val recipe = recipes[rndRecipeIndex]
-
-                    recipeImg.setImageBitmap(decodeB64ToBitmap(recipe.imageBase64))
-                    recipeSuggestionsText.text = prefixList[rnd.nextInt(
+                    homeViewModel.recipeImg?.setImageBitmap(decodeB64ToBitmap(recipe.imageBase64))
+                    homeViewModel.recipeName?.text = prefixList[rnd.nextInt(
                         0,
                         prefixList.size - 1
                     )] + " \"" + recipes[rndRecipeIndex].name + "\"?"
