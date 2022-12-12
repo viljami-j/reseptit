@@ -4,31 +4,33 @@ package com.example.reseptit.ui.add
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.os.*
 import android.provider.MediaStore
-import android.util.Log
+import android.util.*
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.RequiresApi
-import androidx.camera.*
-import androidx.camera.core.*
-import androidx.core.content.*
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import com.example.reseptit.Recipe
 import com.example.reseptit.databinding.FragmentAddBinding
-import java.util.*
+import java.io.ByteArrayOutputStream
+
 
 class AddFragment : Fragment() {
 
     private var _binding: FragmentAddBinding? = null
     private val binding: FragmentAddBinding get() = _binding!!
 
+    private lateinit var  addRecipesViewModel: AddViewModel
+
     lateinit var cameraButton: Button
     lateinit var libButton: Button
+    lateinit var addButton: Button
     lateinit var selectedImage: ImageView
     companion object {
         // Muutetaan joksikin muuksi kun lisätään tietokantaan
@@ -40,24 +42,46 @@ class AddFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        addRecipesViewModel = ViewModelProvider(this)[AddViewModel::class.java]
         // Inflate the layout for this fragment
         _binding = FragmentAddBinding.inflate(inflater, container, false)
         cameraButton = binding.cameraButton
         libButton = binding.libraryButton
         selectedImage = binding.selectedImage
+        addButton = binding.addButton
         // Alustetaan listenerit
         cameraButton.setOnClickListener { openCamera() }
         libButton.setOnClickListener { openLibrary() }
+        addButton.setOnClickListener { addRecipeToDB() }
         textFocusListener()
+
 
         return binding.root
     }
+
+    private fun addRecipeToDB() {
+        val name: String = binding.inputName.text.toString()
+        val desc: String = binding.inputDescription.text.toString()
+        val ing: String = binding.inputIngredients.text.toString()
+        val instr: String = binding.inputInstructions.text.toString()
+        val time: Int? = Integer.parseInt(binding.inputTime.text.toString())
+
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        val bitmap = (binding.selectedImage.drawable as BitmapDrawable).bitmap
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
+        val imageBytes: ByteArray = byteArrayOutputStream.toByteArray()
+        val imageString: String = Base64.encodeToString(imageBytes, Base64.DEFAULT)
+
+        val recipe = Recipe(name,desc,ing,instr,time,imageString)
+
+        addRecipesViewModel.addRecipe(recipe)
+    }
+
     private var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             // There are no request codes
             val data: Intent? = result.data
             val photo = data!!.extras!!["data"] as Bitmap?
-            Log.d("DATA",data!!.extras!!["data"].toString())
             // Set the image in imageview for display
             selectedImage.setImageBitmap(photo?.let { Bitmap.createScaledBitmap(it, 600,600, false) })
         }
@@ -93,28 +117,28 @@ class AddFragment : Fragment() {
                 binding.timeContainer.helperText = validTime()
             }
         }
-        binding.inputIngredients.setOnFocusChangeListener { _, hasFocus ->
+        binding.inputDescription.setOnFocusChangeListener { _, hasFocus ->
             if(!hasFocus){
-                binding.ingredientsContainer.helperText = validIng()
+                binding.descriptionContainer.helperText = validIng()
             }
         }
-        binding.inputManual.setOnFocusChangeListener { _, hasFocus ->
+        binding.inputInstructions.setOnFocusChangeListener { _, hasFocus ->
             if(!hasFocus){
-                binding.manualContainer.helperText = validManual()
+                binding.instructionContainer.helperText = validManual()
             }
         }
     }
     //Tarkistetaan syötekentät
     private fun validManual(): String? {
-        val manualText = binding.inputManual.text.toString()
+        val manualText = binding.inputInstructions.text.toString()
         if(manualText.length<=5) return "Liian lyhyet ohjeet"
 
         return null
     }
 
     private fun validIng(): String? {
-        val ingText = binding.inputIngredients.text.toString()
-        if(ingText.length<=5) return "Liian lyhyt aineslista"
+        val ingText = binding.inputDescription.text.toString()
+        if(ingText.length<=5) return "Liian lyhyt aineslista ja/tai valmistuohje"
 
         return null
     }

@@ -14,7 +14,7 @@
     <string name="app_bar_darkmode">Dark Mode</string>
     <string name="app_bar_lightmode">Light Mode</string>
 
-    <string name="ingredients">Ainesosat:</string>
+    <string name="description">Kuvaus:</string>
     <string name="recipe_instructions">Valmistusohje:</string>
     <string name="recipe_prefix_cooking_time_in_minutes">n.</string>
 
@@ -36,7 +36,7 @@
     <string name="query_hint">Etsi resepti</string>
     <string name="required">Vaadittu</string>
     <string name="recipe_name">Reseptin nimi</string>
-    <string name="time_eval">Aika-arvio</string>
+    <string name="time_eval">Aika-arvio minuutteina:</string>
     <string name="manual">Valmistus ohjeet</string>
     <string name="mButton">Valitse</string>
     <string name="label1">Valitse kuva kirjastosta</string>
@@ -45,6 +45,7 @@
     <string name="addToDB">Luo resepti</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="recipe_ingredients">Ainesosat:</string>
 
 
 </resources>

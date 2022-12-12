@@ -51,7 +51,7 @@
             android:lines="1" />
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/ingredientsContainer"
+        android:id="@+id/descriptionContainer"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -63,11 +63,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/timeContainer">
         <EditText
-            android:id="@+id/input_ingredients"
+            android:id="@+id/input_description"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:gravity="top"
-            android:hint="@string/ingredients"
+            android:hint="@string/description"
             android:inputType="textMultiLine"
             android:overScrollMode="always"
             android:padding="15dp"
@@ -75,7 +75,7 @@
             android:scrollbars="vertical" />
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/manualContainer"
+        android:id="@+id/instructionContainer"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -85,13 +85,37 @@
         app:helperTextTextColor="@android:color/holo_red_dark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ingredientsContainer">
+        app:layout_constraintTop_toBottomOf="@+id/descriptionContainer">
         <EditText
-            android:id="@+id/input_manual"
+            android:id="@+id/input_instructions"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:gravity="top"
-            android:hint="@string/manual"
+            android:hint="@string/recipe_instructions"
+            android:inputType="textMultiLine"
+            android:overScrollMode="always"
+            android:padding="15dp"
+            android:scrollbarStyle="insideInset"
+            android:scrollbars="vertical" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ingredientsContainer"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="20dp"
+        app:helperText="@string/required"
+        app:helperTextTextColor="@android:color/holo_red_dark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/instructionContainer">
+        <EditText
+            android:id="@+id/input_ingredients"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:gravity="top"
+            android:hint="@string/recipe_ingredients"
             android:inputType="textMultiLine"
             android:overScrollMode="always"
             android:padding="15dp"
@@ -107,7 +131,7 @@
         android:scaleType="centerInside"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/manualContainer">
+        app:layout_constraintTop_toBottomOf="@+id/ingredientsContainer">
 
     </ImageView>
 

@@ -110,7 +110,7 @@ class HomeFragment : Fragment() {
 
                 if (isAdded) {
                     requireActivity().runOnUiThread {
-                        if (prefixList.isNotEmpty() && recipes.isNotEmpty()) {
+                        if (prefixList.isNotEmpty() && recipes.isNotEmpty()&& recipes.size > 1) {
                             rndRecipeIndex = rnd.nextInt(0, recipes.size - 1)
                             val recipe = recipes[rndRecipeIndex]
                             homeViewModel.recipeImg?.setImageBitmap(decodeB64ToBitmap(recipe.imageBase64))
