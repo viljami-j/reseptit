@@ -6,9 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.reseptit.R
+import com.example.reseptit.Recipe
+import com.example.reseptit.RecipeDatabase
+import com.example.reseptit.RecipeRepository
 import com.example.reseptit.databinding.FragmentOpenedRecipeBinding
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+
 
 class OpenedRecipeFragment : Fragment() {
     private var _binding: FragmentOpenedRecipeBinding? = null
@@ -17,6 +24,8 @@ class OpenedRecipeFragment : Fragment() {
     private val binding get() = _binding!!
 
     lateinit var root: View
+
+
 
     // returns an array containing: suffix, valueInDeducedTimeUnit
     private fun deduceAppropriateTimeUnit(minutes: Int?): Array<String> {
@@ -36,6 +45,29 @@ class OpenedRecipeFragment : Fragment() {
         }
     }
 
+    private fun handleDeleteButtonClick(openedRecipeViewmodel: OpenedRecipeViewmodel, rid: Int?) {
+        if (rid == null) {
+            return
+        }
+
+        val builder = this@OpenedRecipeFragment.context?.let { AlertDialog.Builder(it) }
+        builder?.setMessage("Haluatko varmasti poistaa tämän reseptin?")?.setCancelable(false)
+            ?.setPositiveButton("Kyllä") { dialog, id ->
+                val recipe: Recipe =
+                    RecipeRepository(RecipeDatabase.getDatabase(openedRecipeViewmodel._application)).findRecipeByRid(
+                        rid
+                    )
+                RecipeRepository(RecipeDatabase.getDatabase(openedRecipeViewmodel._application)).deleteRecipe(
+                    recipe
+                )
+                activity?.onBackPressed()
+            }?.setNegativeButton("Ei") { dialog, id ->
+            // Dismiss the dialog
+            dialog.dismiss()
+        }
+        builder?.create()?.show()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -44,11 +76,19 @@ class OpenedRecipeFragment : Fragment() {
         _binding = FragmentOpenedRecipeBinding.inflate(inflater, container, false)
         root = binding.root
 
+        var openedRecipeViewmodel = ViewModelProvider(this)[OpenedRecipeViewmodel::class.java]
+
+        val tvDataonlyRecipeID = root.findViewById<TextView>(R.id.dataonly_recipeid)
+        val rid: Int? = arguments?.getString("recipeID")?.toInt()
+
         val ivImage = root.findViewById<ImageView>(R.id.recipe_opened_image)
         val tvIngredients = root.findViewById<TextView>(R.id.recipe_opened_ingredients)
         val tvCookingInstructions = root.findViewById<TextView>(R.id.recipe_opened_cooking_instructions)
         val tvCookingTimeInUnits = root.findViewById<TextView>(R.id.recipe_opened_cooking_time_in_minutes)
         val tvCookingTimeSuffix = root.findViewById<TextView>(R.id.recipe_suffix_cooking_time_in_minutes)
+        val fabDeleteButton = root.findViewById<FloatingActionButton>(R.id.deleteButtonFAB)
+
+        fabDeleteButton.setOnClickListener { handleDeleteButtonClick(openedRecipeViewmodel, rid)}
 
         // Relevant classes:
         // RecipeListAdapter.kt
@@ -69,11 +109,6 @@ class OpenedRecipeFragment : Fragment() {
         tvCookingTimeSuffix.text = timeUnit[0]
 
         return root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
     }
 
     override fun onDestroyView() {

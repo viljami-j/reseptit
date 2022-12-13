@@ -57,6 +57,7 @@ class RecipeListAdapter(private val recipes: List<Recipe>) : RecyclerView.Adapte
         holder.viewCookingInstructions.text = recipe.cookingInstructions
         holder.viewCookingTimeInMinutes.text = recipe.cookingTimeInMinutes.toString()
         holder.viewDesc.text = recipe.description
+        holder.viewRecipeID.text = recipe.rid.toString()
     }
 
     override fun getItemCount(): Int {
@@ -64,6 +65,7 @@ class RecipeListAdapter(private val recipes: List<Recipe>) : RecyclerView.Adapte
     }
 
     inner class RecyclerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        var viewRecipeID: TextView
         var viewImg: ImageView
         var viewTitle: TextView
         var viewDesc: TextView
@@ -78,6 +80,7 @@ class RecipeListAdapter(private val recipes: List<Recipe>) : RecyclerView.Adapte
             viewImg = itemView.findViewById(R.id.recipe_image) // TODO: Add necessary conversions depending on picture approach
             viewTitle = itemView.findViewById(R.id.recipe_title)
             viewDesc = itemView.findViewById(R.id.recipe_desc)
+            viewRecipeID = itemView.findViewById(R.id.recipe_id)
 
             viewIngredients = itemView.findViewById(R.id.recipe_ingredients)
             viewCookingInstructions = itemView.findViewById(R.id.recipe_cooking_instructions)
@@ -99,7 +102,8 @@ class RecipeListAdapter(private val recipes: List<Recipe>) : RecyclerView.Adapte
                     "recipeDesc" to viewDesc.text,
                     "openedRecipeTitle" to viewTitle.text,
                     "recipeCookingInstructions" to viewCookingInstructions.text,
-                    "recipeCookingTimeInMinutes" to viewCookingTimeInMinutes.text
+                    "recipeCookingTimeInMinutes" to viewCookingTimeInMinutes.text,
+                    "recipeID" to viewRecipeID.text
                 )
                 itemView.findNavController().navigate(R.id.nav_opened_recipe, bundle)
                 // bundle contents are accessed like so (using arguments?.):

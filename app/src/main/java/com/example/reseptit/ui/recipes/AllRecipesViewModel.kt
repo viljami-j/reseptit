@@ -16,9 +16,7 @@ import java.io.IOException
 class AllRecipesViewModel(application: Application) : AndroidViewModel(application) {
 
     private val recipeRepository = RecipeRepository(RecipeDatabase.getDatabase(application))
-
     val recipes: LiveData<List<Recipe>> = recipeRepository.recipes
-
     private fun refreshDataFromRepository() {
         viewModelScope.launch {
             try {
@@ -29,7 +27,6 @@ class AllRecipesViewModel(application: Application) : AndroidViewModel(applicati
             }
         }
     }
-
     init {
         refreshDataFromRepository()
     }

@@ -43,7 +43,7 @@ interface RecipeDao {
     fun loadAllByIds(recipeIds: IntArray): List<Recipe>
 
     @Query("SELECT * FROM recipe WHERE rid LIKE :recipeId LIMIT 1")
-    fun findRecipeByRid(recipeId: Int): Recipe
+    fun findRecipeByRid(recipeId: Int?): Recipe
 
     @Query("SELECT * FROM recipe WHERE name LIKE :recipeName LIMIT 5")
     fun findRecipesByName(recipeName: String): List<Recipe>

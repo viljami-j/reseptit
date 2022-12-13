@@ -14,7 +14,16 @@ class RecipeRepository(private val database: RecipeDatabase) {
             database.recipeDao().insertAll(*recipes.toTypedArray())
         }
     }
-    fun addRecipe(recipe: Recipe){
+
+    fun addRecipe(recipe: Recipe) {
         database.recipeDao().insertOne(recipe)
+    }
+
+    fun findRecipeByRid(rid: Int?): Recipe {
+        return database.recipeDao().findRecipeByRid(rid)
+    }
+
+    fun deleteRecipe(recipe: Recipe) {
+        database.recipeDao().delete(recipe)
     }
 }
