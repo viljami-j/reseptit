@@ -6,20 +6,20 @@ import androidx.lifecycle.*
 import com.example.reseptit.R
 import com.example.reseptit.Recipe
 import com.example.reseptit.RecipeDatabase
-import com.example.reseptit.RecipesRepository
+import com.example.reseptit.RecipeRepository
 import kotlinx.coroutines.launch
 import java.io.IOException
 
 class AddViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val recipesRepository = RecipesRepository(RecipeDatabase.getDatabase(application))
+    private val recipeRepository = RecipeRepository(RecipeDatabase.getDatabase(application))
 
-    val recipes: LiveData<List<Recipe>> = recipesRepository.recipes
+    val recipes: LiveData<List<Recipe>> = recipeRepository.recipes
 
     private fun refreshDataFromRepository() {
         viewModelScope.launch {
             try {
-                recipesRepository.refreshRecipes()
+                recipeRepository.refreshRecipes()
                 _eventNetworkError.value = false
             } catch (networkError: IOException) {
                 if (recipes.value.isNullOrEmpty()) _eventNetworkError.value = true
@@ -31,8 +31,11 @@ class AddViewModel(application: Application) : AndroidViewModel(application) {
         refreshDataFromRepository()
     }
     fun addRecipe(recipe: Recipe){
-        recipesRepository.addRecipe(recipe)
+        recipeRepository.addRecipe(recipe)
     }
+
+    val recipeAddedToast: Toast = Toast.makeText(application, "Resepti luotu onnistuneesti", Toast.LENGTH_LONG)
+
 
     /**
      * Event triggered for network error. This is private to avoid exposing a

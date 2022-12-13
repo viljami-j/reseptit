@@ -39,6 +39,8 @@ class HomeFragment : Fragment() {
 
     private var suggestionsTimer: Timer = Timer()
 
+    private var previousDisplayedSuggestion: Int = 0;
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -102,7 +104,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Timer().scheduleAtFixedRate(object : TimerTask() {
+        Timer().schedule(object : TimerTask() {
             @SuppressLint("SetTextI18n")
             override fun run() {
                 val rnd: Random = Random
@@ -110,8 +112,16 @@ class HomeFragment : Fragment() {
 
                 if (isAdded) {
                     requireActivity().runOnUiThread {
-                        if (prefixList.isNotEmpty() && recipes.isNotEmpty()&& recipes.size > 1) {
-                            rndRecipeIndex = rnd.nextInt(0, recipes.size - 1)
+                        if (prefixList.isNotEmpty() && recipes.isNotEmpty() && recipes.size > 1) {
+                            rndRecipeIndex = rnd.nextInt(0, recipes.size)
+
+                            // Prevent duplicate suggestions
+                            while (rndRecipeIndex == previousDisplayedSuggestion) {
+                                rndRecipeIndex = rnd.nextInt(0, recipes.size)
+                            }
+
+                            previousDisplayedSuggestion = rndRecipeIndex
+
                             val recipe = recipes[rndRecipeIndex]
                             homeViewModel.recipeImg?.setImageBitmap(decodeB64ToBitmap(recipe.imageBase64))
                             homeViewModel.recipeName?.text = prefixList[rnd.nextInt(

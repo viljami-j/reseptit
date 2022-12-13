@@ -9,20 +9,20 @@ import androidx.lifecycle.viewModelScope
 import com.example.reseptit.R
 import com.example.reseptit.Recipe
 import com.example.reseptit.RecipeDatabase
-import com.example.reseptit.RecipesRepository
+import com.example.reseptit.RecipeRepository
 import kotlinx.coroutines.launch
 import java.io.IOException
 
 class AllRecipesViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val recipesRepository = RecipesRepository(RecipeDatabase.getDatabase(application))
+    private val recipeRepository = RecipeRepository(RecipeDatabase.getDatabase(application))
 
-    val recipes: LiveData<List<Recipe>> = recipesRepository.recipes
+    val recipes: LiveData<List<Recipe>> = recipeRepository.recipes
 
     private fun refreshDataFromRepository() {
         viewModelScope.launch {
             try {
-                recipesRepository.refreshRecipes()
+                recipeRepository.refreshRecipes()
                 _eventNetworkError.value = false
             } catch (networkError: IOException) {
                 if (recipes.value.isNullOrEmpty()) _eventNetworkError.value = true

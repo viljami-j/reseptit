@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class RecipesRepository(private val database: RecipeDatabase) {
+class RecipeRepository(private val database: RecipeDatabase) {
     val recipes: LiveData<List<Recipe>> = database.recipeDao().getRecipes() // Gets local recipes
 
     // Refresh offline recipe cache from network

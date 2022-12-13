@@ -52,7 +52,7 @@ class OpenedRecipeFragment : Fragment() {
 
         // Relevant classes:
         // RecipeListAdapter.kt
-        // RecyclerViewHolder.kt
+        // RecipeRepository.kt
 
         val imgBA = arguments?.getByteArray("recipeImage")
         if (imgBA != null) {

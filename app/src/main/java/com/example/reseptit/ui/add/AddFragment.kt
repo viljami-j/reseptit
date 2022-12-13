@@ -52,14 +52,13 @@ class AddFragment : Fragment() {
         // Alustetaan listenerit
         cameraButton.setOnClickListener { openCamera() }
         libButton.setOnClickListener { openLibrary() }
-        addButton.setOnClickListener { addRecipeToDB() }
+        addButton.setOnClickListener { addRecipeToDB(addRecipesViewModel) }
         textFocusListener()
-
 
         return binding.root
     }
 
-    private fun addRecipeToDB() {
+    private fun addRecipeToDB(addViewModel: AddViewModel) {
         val name: String = binding.inputName.text.toString()
         val desc: String = binding.inputDescription.text.toString()
         val ing: String = binding.inputIngredients.text.toString()
@@ -75,6 +74,7 @@ class AddFragment : Fragment() {
         val recipe = Recipe(name,desc,ing,instr,time,imageString)
 
         addRecipesViewModel.addRecipe(recipe)
+        addViewModel.recipeAddedToast.show()
     }
 
     private var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
